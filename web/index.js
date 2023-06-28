@@ -6,6 +6,7 @@ import serveStatic from 'serve-static'
 
 import shopify from './shopify.js'
 import applyQrCodeApiEndpoints from './middleware/qr-code-api.js'
+import applyQrCodePublicEndpoints from './middleware/qr-code-public.js'
 import GDPRWebhookHandlers from './gdpr.js'
 
 const PORT = parseInt(
@@ -34,6 +35,7 @@ app.post(
 
 // If you are adding routes outside of the /api path, remember to
 // also add a proxy rule for them in web/frontend/vite.config.js
+applyQrCodePublicEndpoints(app)
 
 app.use('/api/*', shopify.validateAuthenticatedSession())
 
